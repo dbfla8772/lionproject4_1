@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BLOG</title>
+        <style>
+            body {  
+                text-align: center; 
+                background-image: url("https://img5.yna.co.kr/etc/inner/KR/2018/01/19/AKR20180119050900056_01_i_P2.jpg");
+            }
+            h1 {    
+                font-family: 'Impact';   
+                color: white;
+            }
+            table {
+                border: black 2px solid;
+                width: 500px;
+                height: 400px;
+                margin: 50px auto; 
+            }
+            input, textarea {
+                background-color: beige;
+            }
+           .col1 {
+               font-weight: bold;
+               font-size: large;
+           }
+        </style>
+    </head>
+    <body>
+        <h1>Update Your Blog</h1> 
+        <form action="{% url 'formBlog:updatePost' blogEdit.id %}" method="post">   
+            {%csrf_token%} 
+            <table>
+                <tr>
+                    <td class="col1">제목</td>
+                    <td><input type="text" name="title" value="{{blogEdit.title}}"></td>
+                </tr>
+                <tr>
+                    <td class="col1">작성자</td>
+                    <td><input type="text" name="writer" value="{{blogEdit.writer}}"></td>
+                </tr>
+                <tr>
+                    <td class="col1">본문</td>
+                    <td><textarea name="body" cols="30" rows="10">{{blogEdit.body}}</textarea></td>
+                </tr>
+            </table>
+            <button type="submit">submit</button>
+        </form>
+    </body>
+</html>

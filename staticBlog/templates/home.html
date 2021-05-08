@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BLOG</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" 
+            rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+        <style>
+            body {  
+                text-align: center; 
+                background-image: url("https://img5.yna.co.kr/etc/inner/KR/2018/01/19/AKR20180119050900056_01_i_P2.jpg");
+            }
+            h1 {    
+                font-family: 'Impact';  
+                color: white;
+            }
+            table, td { 
+                margin: auto; 
+                border: 1px solid black;
+                background-color: bisque;
+            }
+            tr {    height: 90px;  }
+            .row1 {    
+                background-color: plum;
+            }
+            .id {   
+                width: 80px;
+                color: red;
+                font-weight: bold;   
+            }
+            .title {    
+                width: 150px; 
+                font-weight: bold;
+            }
+            .writer {   width: 100px;   }
+            .summary {  width: 400px;   }
+            .more {    
+                width:  100px;
+                font-style: italic;
+            }
+        </style>    
+    </head>
+    <body>
+        {% load static %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="{% url 'homeHtml' %}">
+                                <img src="{% static '멋사로고.png' %}" width="80px" height="70px">
+                            </a>
+                        </li>
+                        <p>HOME</p>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h1>Blog Project</h1>
+        <div>
+            <div style="margin-right: 550px; text-align: right; font-size: large; font-weight: bold;"><a href="{% url 'formBlog:newHtml' %}">글쓰기</a></div>
+            <table>
+                <tr>
+                    <td class="row1"><h3>ID</h3></td>
+                    <td class="row1"><h3>제목</h3></td>
+                    <td class="row1"><h3>글쓴이</h3></td>
+                    <td class="row1"><h3>본문요약</h3></td>
+                    <td class="row1"><h3>자세히</h3></td>
+                </tr>
+        {% for blogRow in blogObject %}  
+                <tr>
+                    <td class="id">{{blogRow.id}}</td>
+                    <td class="title">{{blogRow.title}}</td>
+                    <td class="writer">{{blogRow.writer}}</td>
+                    <td class="summary">{{blogRow.summary}}</td> 
+                    <td class="more"><a href="{%url 'formBlog:detailHtml' blogRow.id %}">...more</a></td>
+                </tr>
+        {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
