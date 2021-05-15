@@ -1,9 +1,8 @@
-from django.contrib import admin
 from django.urls import path
 from .views import * 
-
-app_name="staticBlog"
+from formBlog.views import detailHtml, new
 
 urlpatterns = [    
-    
-]
+    path('<str:id>', detailHtml, name="detailHtml"), 
+    path('new/', new, name="new"), 
+] 

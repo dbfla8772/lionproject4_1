@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class Blog(models.Model):
@@ -8,7 +10,8 @@ class Blog(models.Model):
     writer = models.CharField(max_length=100)
     pub_date = models.DateTimeField()
     body = models.TextField()
-    image = models.ImageField(upload_to = 'formBlog/', blank=True, null=True) # upload_to는 업로드할 폴더를 지정하는 것, 사진 이름이 저장, MEDIA_URL로 지정해둔 media 폴더 안에 blog 폴더 생성하서 관리
+    image = models.ImageField(upload_to = 'formBlog/', blank=True, null=True) 
+    image_thumbnail = ImageSpecField(source = 'image',processors=[ResizeToFill(120,100)])
 
     def __str__(self):
         return self.title

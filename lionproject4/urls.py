@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 from staticBlog.views import homeHtml
+
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homeHtml, name="homeHtml"),
+    path('staticBlog/', include('staticBlog.urls')),
     path('formBlog/', include('formBlog.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # static을 병렬적으로 붙이는 형식으로 더함. 한번 개발하면 복붙해서 계속 사용

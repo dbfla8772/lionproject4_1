@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,54 +15,37 @@
             text-align: center; 
             background-image: url("https://img5.yna.co.kr/etc/inner/KR/2018/01/19/AKR20180119050900056_01_i_P2.jpg");
         }
-        table,td {
-            margin: 50px auto; 
-            border: 1px solid black;
-        }
-        tr {
-            height: 80px;
-            background-color: bisque;
-        }
-        .row1 { 
-            width: 600px;
-            background-color: plum;
-        }
-        .col1 { 
-            width: 100px;
-            color: blue;
-        }
-        .body { width: 500px;}
-       
     </style>
 </head>
+{% block content %}
 <body>
-    <div>
-        <table>
-            <tr>
-                <td class="row1" colspan="2"><h1>{{blogModel.title}}</h1></td>
-            </tr>
-            <tr>
-                <td class="col1"><h3>작성자</h3></td>
-                <td>{{blogModel.writer}}</td>
-            </tr>
-            <tr>
-                <td class="col1"><h3>날짜</34></td>
-                <td>{{blogModel.pub_date}}</td>
-            </tr>
-            <tr>
-                <td class="col1"><h3>본문</h3></td>
-                <td class="body">{{blogModel.body}}</td>
-            </tr>
-            <tr>
-                <td class="col1"><h3>사진</h3></td>
-                {% if blogModel.image %}
-                <td><img src="{{blogModel.image.url}}" width="100" height="100"></td>  <!-- 이미지의 경로(url)을 보내줌으로써 이미지를 detail 페이지에서 볼 수 있음.-->
-                {% endif %}
-            </tr>
-        </table>
+    <h1>Detail Your Blog</h1>
+    <div class="card text-center border-dark" style="width: 25rem; margin: 20px 860px;"> 
+        {% if blogModel.image %}
+        <img src="{{blogModel.image.url}}" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+            <h3 class="card-title">{{blogModel.title}}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{blogModel.writer}}</h6>
+            <p class="card-text">{{blogModel.body}}</p>
+        </div>
+        <div class="card-footer text-muted">
+            {{blogModel.pub_date}}
+        </div>
     </div>
-    <a href="{% url 'formBlog:editHtml' blogModel.id %}" style="font-size: large; font-style: italic;">수정하기</a>  
-    <a href="{% url 'formBlog:deletePost' blogModel.id %}" style="font-size: large; font-style: italic;">삭제하기</a>
-    <a href="{% url 'homeHtml' %}" style="font-size: large; font-style: italic;">홈으로</a>
+    <div style="text-align: center;">
+        <div>
+            <a href="{% url 'formBlog:edit' blogModel.id %}" style="font-size: x-large; font-style: italic;">수정하기</a>  
+            <a href="{% url 'formBlog:deletePost' blogModel.id %}" style="font-size: x-large; font-style: italic;">삭제하기</a>
+            <a href="{% url 'homeHtml' %}" style="font-size: x-large; font-style: italic;">홈으로</a>
+        </div>
+        <div style="margin-top: 20px;">
+            {% if blogModel.image_thumbnail %}
+            <img src="{{blogModel.image_thumbnail.url}}">
+            {% endif %}
+            <p style="font-size: large; color: white;">썸네일</p>
+        </div>
+    </div>
 </body>
-</html
+</html>
+{% endblock %}

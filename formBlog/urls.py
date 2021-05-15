@@ -6,9 +6,7 @@ app_name = "formBlog"
 
 urlpatterns = [   
     path('<str:id>', detailHtml, name="detailHtml"), 
-    path('new/', newHtml, name="newHtml"),
-    path('create/', createPost, name="createPost"),
-    path('edit/<str:id>', editHtml, name="editHtml"),  
-    path('update/<str:id>', upadatePost, name="updatePost"), 
+    path('new/', new, name="new"),
+    path('edit/<str:id>', edit, name="edit"),  
     path('delete/<str:id>', deletePost, name="deletePost"),  
 ] 
